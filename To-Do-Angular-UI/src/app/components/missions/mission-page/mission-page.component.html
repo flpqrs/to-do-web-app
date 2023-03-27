@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col my-3">
+    <div class="h3">{{currentUserProfile.name}}</div>
+    <div class="h4">Level: {{currentUserProfile.levelId}}</div>
+
+    <div class="progress mb-4" style="width: 20%">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        [style.width]="calculateProgressBarWidth()+ '%'" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <button type="button mb-4" class="btn btn-outline-secondary" data-bs-toggle="modal"
+      data-bs-target="#createMissionModal">
+      Create Mission
+    </button>
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <app-missions-column [title]="'Daily Missions'" [missions]="dailyMissions" />
+  <app-missions-column [title]="'Weekly Missions'" [missions]="weeklyMissions" />
+  <app-missions-column [title]="'Monthly Missions'" [missions]="monthlyMissions" />
+  <app-missions-column [title]="'Long Term Missions'" [missions]="longTermMissions" />
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createMissionModal" tabindex="-1" aria-labelledby="createMissionModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createMissionModalLabel">Create Mission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="missionTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="missionTitle" name="title" placeholder="Enter title"
+              [(ngModel)]="newMission.title" required minlength="3" maxlength="80" #title="ngModel">
+            <div *ngIf="title.errors?.['minlength']">
+              Title must be from 3 to 80 symbols.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="missionCategory" class="form-label">Category</label>
+            <select class="form-select" id="missionCategory" name="categoryId" [(ngModel)]="newMission.categoryId"
+              required>
+              <option selected disabled>Select category</option>
+              <option value="1">Daily</option>
+              <option value="2">Weekly</option>
+              <option value="3">Monthly</option>
+              <option value="4">Long Term</option>
+            </select>
+
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" [disabled]="!title.valid" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="createMission()">Create</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editMissionModal" tabindex="-1" aria-labelledby="editMissionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMissionModalLabel">Edit Mission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="missionTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="missionTitle" name="title" placeholder="Enter title"
+              [(ngModel)]="this.editingMission.title" required minlength="3" maxlength="80" #updatetitle="ngModel">
+            <div *ngIf="updatetitle.errors?.['minlength']">
+              Title must be from 3 to 80 symbols.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="missionCategory" class="form-label">Category</label>
+            <select class="form-select" id="missionCategory" name="categoryId"
+              [(ngModel)]="this.editingMission.categoryId" required>
+              <option selected disabled>Select category</option>
+              <option value="1">Daily</option>
+              <option value="2">Weekly</option>
+              <option value="3">Monthly</option>
+              <option value="4">Long Term</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="ngOnInit()">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!updatetitle.valid"
+          (click)="updateMission()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

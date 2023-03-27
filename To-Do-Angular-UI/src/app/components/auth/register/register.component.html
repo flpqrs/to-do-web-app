@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="class col-md-3">
+      <div class="h2">Sign Up</div>
+      <form #form="ngForm" (ngSubmit)="registerUser();">
+        <div class="form-group">
+          <label for="username">Login</label>
+          <input type="text" class="form-control" id="username" name="username" #username="ngModel" maxlength="20"
+            [(ngModel)]="register.username" required>
+        </div>
+        <div class="text-danger" *ngIf="form.submitted && username.errors?.['required']">
+          Login is required.
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+            #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="register.email" required>
+        </div>
+        <div class="text-danger" *ngIf="form.submitted && email.errors?.['required']">
+          Email is required.
+        </div>
+
+        <div class="notice" *ngIf="email.errors?.['pattern']">
+          Email have wrong format.
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" #password="ngModel"
+            [(ngModel)]="register.password" required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_&])[A-Za-z\d@$!_%*?&]{6,20}$">
+        </div>
+        <div class="text-danger" *ngIf="form.submitted && password.errors?.['required']">
+          Password is required.
+        </div>
+        <div class="notice" *ngIf="password.errors?.['pattern']">Password must be from 6 to 20 symbols, have at
+          least: one digit, one uppercase or lowercase letter, one special character </div>
+        <button type="submit" class="btn my-3">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="message" class="alert alert-danger col-md-2" role="alert">{{ message }}</div>
+</div>

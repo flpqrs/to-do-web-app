@@ -1,0 +1,15 @@
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-2 offset-md-4">
+      <form #userProfileForm="ngForm" (ngSubmit)="createUserProfile()">
+        <div class="form-group">
+          <label for="name">Enter your Hero Name:</label>
+          <input type="text" class="form-control" #name="ngModel" id="name" name="name" [(ngModel)]="userProfile.name"
+            required>
+        </div>
+        <button type="submit" [disabled]="!name.valid" class="btn btn-primary my-3">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

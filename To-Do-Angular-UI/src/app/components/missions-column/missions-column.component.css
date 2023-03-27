@@ -1,0 +1,38 @@
+.rounded-circle {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+  }
+  .deleteMission {
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+  }
+
+  .editMission {
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+  }
+  .completeMission {
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+  }
+
+  .btn:focus {
+    box-shadow: none;
+  }
+
+  .fixed-card{
+    background-color: #fcefe9;
+ }

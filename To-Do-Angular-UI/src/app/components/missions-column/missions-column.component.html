@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col">
+        <div class="h4">{{title}}</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col ">
+        <div class="row" *ngFor="let mission of missions">
+            <div class="col">
+                <div class="card fixed-card my-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <h4 class="card-title small">{{mission.title}}</h4>
+                        <div class="d-flex flex-row align-items-center">
+                            <button class="btn btn-outline-info rounded-circle completeMission ms-1"
+                                (click)="completeMission(this.mission)">
+                                <fa-icon class="completeMission" [icon]="faCheck"></fa-icon>
+                            </button>
+                            <button class="btn btn-outline-secondary rounded-circle editMission ms-1"
+                                data-bs-toggle="modal" data-bs-target="#editMissionModal"
+                                (click)="editMission(mission)">
+                                <fa-icon class="editMission" [icon]="faPenToSquare"></fa-icon>
+                            </button>
+                            <button class="btn btn btn-outline-danger rounded-circle deleteMission ms-1"
+                                (click)="deleteMission(this.mission)">
+                                <fa-icon class="deleteMission" [icon]="faTrash"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
